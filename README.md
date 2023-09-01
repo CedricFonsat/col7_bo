@@ -7,7 +7,7 @@
 ## Install
 
 ```sh
-docker compose up -d
+comper install
 ```
 
 ## Author
