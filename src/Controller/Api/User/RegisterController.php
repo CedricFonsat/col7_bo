@@ -33,6 +33,13 @@ final class RegisterController extends AbstractController
             ]);
         }
 
+        if (!preg_match('/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)\S*$/', $dataUser['password'])) {
+            return $this->json([
+                'error' => true,
+                'code' => 'password_too_weak'
+            ]);
+        }
+
         $user = new User();
         $user->setNickname($dataUser['nickname']);
         $user->setEmail($dataUser['email']);

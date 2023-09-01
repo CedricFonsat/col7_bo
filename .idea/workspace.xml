@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="22c967e5-062b-46ad-89e6-c41c3069803c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/col7_bo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/col7_bo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d711c472-5084-41ad-a424-d9d36472937e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/d711c472-5084-41ad-a424-d9d36472937e.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Api/User/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/User/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Api/User/UsersHomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/User/UsersHomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,26 +183,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "cedric",
-    "last_opened_file_path": "/Users/cedricfonsat/Documents/IOTA/col7_bo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;cedric&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/cedricfonsat/Documents/IOTA/col7_bo&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/config" />
@@ -241,6 +246,8 @@
       <workItem from="1693491148836" duration="1677000" />
       <workItem from="1693556409499" duration="9000" />
       <workItem from="1693559301043" duration="171000" />
+      <workItem from="1693562026188" duration="137000" />
+      <workItem from="1693562185095" duration="2263000" />
     </task>
     <servers />
   </component>
