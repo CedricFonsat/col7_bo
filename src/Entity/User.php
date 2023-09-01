@@ -40,7 +40,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             controller: DeleteUserController::class
         ),
         new Put(),
-        new Get(),
         new Get(
             uriTemplate: '/home/{id}',
             controller: UsersHomeController::class,

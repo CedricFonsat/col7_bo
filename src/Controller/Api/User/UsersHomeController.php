@@ -14,26 +14,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UsersHomeController extends AbstractController
 {
-
-    public function __invoke(Request $request,
-                             User $user,
-                             UserRepository $userRepository,
-                             CollectionCardRepository $collectionCardRepository,
-                             CardFavorisRepository $cardFavorisRepository,
-                             CardRepository $cardRepository,
-                             CategoryRepository $categoryRepository): array
+    public function __invoke(
+        Request                  $request,
+        User $user,
+        UserRepository           $userRepository,
+        CollectionCardRepository $collectionCardRepository,
+        CardFavorisRepository    $cardFavorisRepository,
+        CategoryRepository       $categoryRepository): array
     {
 
-        if ($cardFavorisRepository->findBy(['user' => $user])){
-            $userCardsFavoris =  $cardFavorisRepository->findBy(['user' => $user])[0]->getCards();
+        if ($user != null) {
+            if ($cardFavorisRepository->findBy(['user' => $userRepository->find(12)])) {
+                $userCardsFavoris = $cardFavorisRepository->findBy(['user' => $userRepository->find(12)])[0]->getCards();
 
-       // $userCardsFavoris =  $cardFavorisRepository->findBy(['user' => $user])[0]->getCards();
+                // $userCardsFavoris =  $cardFavorisRepository->findBy(['user' => $user])[0]->getCards();
 
-            $categoryNameCounts = [];
+                $categoryNameCounts = [];
 
                 foreach ($userCardsFavoris as $value) {
                     $categoryName = $value->getCollection()->getCategory()->getName();
@@ -60,17 +61,20 @@ class UsersHomeController extends AbstractController
 
                 $collectionBestForUser = $collectionCardRepository->findBy(['category' => $category]);
 
-            }else{
+            } else {
                 $collectionBestForUser = $collectionCardRepository->findAll();
                 $cover = CollectionCard::CATEGORY_AUTRE;
             }
 
             $users = $userRepository->findUsersWithHighestTotalPrice();
+        }
 
         return [
-            'collection' => $collectionBestForUser,
-            'cover' => $cover,
-            'users' => $users
+            'collection' => $collectionBestForUser ?? null,
+            'cover' => $cover ?? null,
+            'users' => $users ?? null
         ];
     }
+
+
 }
