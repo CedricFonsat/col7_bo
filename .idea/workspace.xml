@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="22c967e5-062b-46ad-89e6-c41c3069803c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/col7_bo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/col7_bo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d711c472-5084-41ad-a424-d9d36472937e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/d711c472-5084-41ad-a424-d9d36472937e.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataFixtures/CardFixtures.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Api/User/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/User/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Api/User/UsersHomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/User/UsersHomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/CollectionCardFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/CollectionCardFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Card.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Card.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -173,6 +177,9 @@
       <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
       <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
       <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
+      <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -248,6 +255,8 @@
       <workItem from="1693559301043" duration="171000" />
       <workItem from="1693562026188" duration="137000" />
       <workItem from="1693562185095" duration="2263000" />
+      <workItem from="1693601416322" duration="1741000" />
+      <workItem from="1693637625289" duration="3135000" />
     </task>
     <servers />
   </component>
