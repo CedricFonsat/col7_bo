@@ -22,6 +22,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[Vich\Uploadable]
@@ -75,6 +76,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     #[Groups(['read:user:item:me', 'read:user:item:home'])]
+    #[Assert\NotBlank]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -85,10 +90,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Regex('/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)\S*$/')]
     private ?string $password = null;
 
     #[Vich\UploadableField(mapping: 'user_thumbnail', fileNameProperty: 'imageName', size: 'imageSize')]
     #[Groups(['read:user:item:me'])]
+    #[Assert\File(
+        maxSize: '1024k',
+        extensions: ['jpg'],
+        extensionsMessage: 'Please upload a valid JPG',
+    )]
     public ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
@@ -101,6 +113,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['read:user:item:me', 'read:user:item:home'])]
+    #[Assert\NotBlank]
     private ?string $nickname = null;
 
     #[ORM\Column]

@@ -44,14 +44,10 @@ final class RegisterController extends AbstractController
         $user->setNickname($dataUser['nickname']);
         $user->setEmail($dataUser['email']);
         $user->setPassword($this->passwordHasher->hashPassword($user, $dataUser['password']));
-
         $this->em->persist($user);
         $this->em->flush();
 
         $token = $this->jwtManager->create($user);
         return new JsonResponse(['token' => $token]);
-
-       // return $user;
-
     }
 }

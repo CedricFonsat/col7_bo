@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CollectionCardRepository::class)]
 #[ApiResource(
@@ -60,6 +61,11 @@ class CollectionCard
 
     #[Vich\UploadableField(mapping: 'collection_thumbnail', fileNameProperty: 'imageName', size: 'imageSize')]
     #[Groups(['read:collection:collection'])]
+    #[Assert\File(
+        maxSize: '1024k',
+        extensions: ['jpg','png'],
+        extensionsMessage: 'Please upload a valid JPG et PNG',
+    )]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
@@ -85,7 +91,11 @@ class CollectionCard
     {
         $this->cards = new ArrayCollection();
         $this->isComingSoon = false;
+
     }
+
+    public function getCategoryName(): string {
+        return $this->category->getName(); }
 
     public static function getCoverToEventComingSoon()
     {
