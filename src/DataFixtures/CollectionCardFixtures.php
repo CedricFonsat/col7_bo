@@ -10,6 +10,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use Faker;
 
 final class CollectionCardFixtures extends Fixture implements FixtureGroupInterface, DependentFixtureInterface
 {
@@ -21,27 +22,18 @@ final class CollectionCardFixtures extends Fixture implements FixtureGroupInterf
     public function load(ObjectManager $manager): void
     {
 
-        $collectionCard = new CollectionCard();
-        $collectionCard->setName();
-        $collectionCard->setCategory();
-        $collectionCard->setAuthor();
-        $collectionCard->setIsComingSoon();
 
-
-        $collectionData = [
-            [
-
-            ]
-        ]
-        $category = $manager->getRepository(Category::class)->find(rand(7, 9));
-
-        $i = 0;
-        foreach ($categoryData as $data) {
-            $i += 1;
-            $category = new Category();
-            $category->setName($data['name']);
-            $manager->persist($category);
-            $manager->flush();
+        for ($i = 0; $i < 10; $i++){
+            $faker = Faker\Factory::create();
+            $category = $manager->getRepository(Category::class)->findAll();
+            $collectionCard = new CollectionCard();
+            $collectionCard->setName($faker->name);
+            $collectionCard->setDescription($faker->paragraph);
+            $collectionCard->setCategory($category[rand(1, 2)]);
+            $collectionCard->setAuthor('collect7');
+            $collectionCard->setIsComingSoon($faker->boolean);
+            $collectionCard->setImageName($faker->imageUrl());
+            $manager->persist($collectionCard);
         }
 
         $manager->flush();

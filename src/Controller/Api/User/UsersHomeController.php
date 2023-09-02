@@ -21,16 +21,14 @@ class UsersHomeController extends AbstractController
 {
     public function __invoke(
         Request                  $request,
-        User $user,
         UserRepository           $userRepository,
         CollectionCardRepository $collectionCardRepository,
         CardFavorisRepository    $cardFavorisRepository,
         CategoryRepository       $categoryRepository): array
     {
 
-        if ($user != null) {
-            if ($cardFavorisRepository->findBy(['user' => $userRepository->find(12)])) {
-                $userCardsFavoris = $cardFavorisRepository->findBy(['user' => $userRepository->find(12)])[0]->getCards();
+            if ($cardFavorisRepository->findBy(['user' => $userRepository->find(26)])) {
+                $userCardsFavoris = $cardFavorisRepository->findBy(['user' => $userRepository->find(26)])[0]->getCards();
 
                 // $userCardsFavoris =  $cardFavorisRepository->findBy(['user' => $user])[0]->getCards();
 
@@ -67,12 +65,12 @@ class UsersHomeController extends AbstractController
             }
 
             $users = $userRepository->findUsersWithHighestTotalPrice();
-        }
+
 
         return [
-            'collection' => $collectionBestForUser ?? null,
-            'cover' => $cover ?? null,
-            'users' => $users ?? null
+            'collection' => $collectionBestForUser,
+            'cover' => $cover,
+            'users' => $users
         ];
     }
 

@@ -40,13 +40,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             controller: DeleteUserController::class
         ),
         new Put(),
-        new Get(
-            uriTemplate: '/home/{id}',
-            controller: UsersHomeController::class,
-            normalizationContext: [
-                'groups' => 'read:user:item:home',
-            ]
-        ),
+        new Get(),
         new Delete(),
         new GetCollection(),
         new GetCollection(
@@ -56,11 +50,18 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
                 'groups' => 'read:user:item:me',
             ]
         ),
-  /*     new Post(
-            uriTemplate: '/users/{id}/add_favorite/{cardId}',
-            controller: AddFavoriteCardController::class
-        ),
-  */
+        new GetCollection(
+            uriTemplate: '/home',
+            controller: UsersHomeController::class,
+            normalizationContext: [
+                'groups' => 'read:user:item:home',
+            ]
+        )
+        /*     new Post(
+                  uriTemplate: '/users/{id}/add_favorite/{cardId}',
+                  controller: AddFavoriteCardController::class
+              ),
+        */
     ],
 
 )]
@@ -69,15 +70,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['read:user:item:me','read:user:item:home','read:collection:collection'])]
+    #[Groups(['read:user:item:me', 'read:user:item:home', 'read:collection:collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    #[Groups(['read:user:item:me','read:user:item:home'])]
+    #[Groups(['read:user:item:me', 'read:user:item:home'])]
     private ?string $email = null;
 
     #[ORM\Column]
-    #[Groups(['read:user:item:me','read:user:item:home'])]
+    #[Groups(['read:user:item:me', 'read:user:item:home'])]
     private array $roles = [];
 
     /**
@@ -91,7 +92,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['read:user:item:me','read:user:item:home'])]
+    #[Groups(['read:user:item:me', 'read:user:item:home'])]
     private ?string $imageName = null;
 
     #[ORM\Column(nullable: true)]
@@ -99,19 +100,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $imageSize = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['read:user:item:me','read:user:item:home'])]
+    #[Groups(['read:user:item:me', 'read:user:item:home'])]
     private ?string $nickname = null;
 
     #[ORM\Column]
-    #[Groups(['read:user:item:me','read:user:item:home'])]
+    #[Groups(['read:user:item:me', 'read:user:item:home'])]
     private ?int $wallet = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Card::class)]
-    #[Groups(['read:user:item:me','read:user:item:home'])]
+    #[Groups(['read:user:item:me', 'read:user:item:home'])]
     private Collection $cards;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: CardFavoris::class)]
-    #[Groups(['read:user:item:me','read:user:item:home'])]
+    #[Groups(['read:user:item:me', 'read:user:item:home'])]
     private Collection $cards_favoris;
 
     public function __construct()
@@ -127,12 +128,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    #[Groups(['read:user:item:me','read:user:item:home'])]
+    #[Groups(['read:user:item:me', 'read:user:item:home'])]
     public function getImageUrl(): string
     {
-        if ($this->imageName != null){
-            return 'http://192.168.1.14:8000/uploads/users/'.$this->imageName;
-        }else{
+        if ($this->imageName != null) {
+            return 'http://192.168.1.14:8000/uploads/users/' . $this->imageName;
+        } else {
             return 'https://4hcm.org/wp-content/uploads/2021/05/image-placeholder-350x350-1.png';
         }
     }
@@ -161,7 +162,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
