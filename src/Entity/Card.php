@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CardRepository::class)]
 #[Vich\Uploadable]
@@ -45,6 +46,7 @@ class Card
         'read:user:item:me',
         'read:user:item:home'
     ])]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column]
@@ -68,6 +70,11 @@ class Card
         'read:collection:collection',
         'read:user:item:me',
     ])]
+    #[Assert\File(
+        maxSize: '1024k',
+        extensions: ['jpg'],
+        extensionsMessage: 'Please upload a valid JPG',
+    )]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]

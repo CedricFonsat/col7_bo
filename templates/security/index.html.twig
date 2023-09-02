@@ -4,20 +4,29 @@
 {# ... #}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    <form action="{{ path('login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}">
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password">
-
-        {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"> #}
-
-        <button type="submit">login</button>
-    </form>
+    <main class="main">
+        <div class="container">
+            <section class="wrapper">
+                <div class="heading">
+                    <h1 class="text text-large">Sign In</h1>
+                </div>
+                {% if error %}
+                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <form name="signin" class="form" action="{{ path('login') }}" method="post">
+                    <div class="input-control">
+                        <label for="username" class="input-label" hidden>Email Address</label>
+                        <input type="email" name="_username" value="{{ last_username }}" id="username" class="input-field" placeholder="Email Address">
+                    </div>
+                    <div class="input-control">
+                        <label for="password" class="input-label" hidden>Password</label>
+                        <input type="password" name="_password" id="password" class="input-field" placeholder="Password">
+                    </div>
+                    <div class="input-control">
+                        <input type="submit" name="submit" class="input-submit" value="Sign In">
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
 {% endblock %}
