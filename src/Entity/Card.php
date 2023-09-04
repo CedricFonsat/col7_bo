@@ -102,6 +102,9 @@ class Card
     #[ORM\ManyToMany(targetEntity: CardFavoris::class, mappedBy: 'cards')]
     private Collection $cardFavoris;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->user = null;
@@ -174,8 +177,6 @@ class Card
         $this->imageFile = $imageFile;
 
         if (null !== $imageFile) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
         }
     }
@@ -247,6 +248,18 @@ class Card
         if ($this->cardFavoris->removeElement($cardFavori)) {
             $cardFavori->removeCard($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

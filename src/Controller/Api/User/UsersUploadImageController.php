@@ -29,7 +29,7 @@ class UsersUploadImageController extends AbstractController
     {
         $requestData = json_decode($request->getContent(), true);
 
-        $user = $userRepository->find(10); // Remplacez 6 par l'ID de l'utilisateur que vous souhaitez associer à l'image
+        $user = $userRepository->find(1); // Remplacez 6 par l'ID de l'utilisateur que vous souhaitez associer à l'image
 
         if (!$user instanceof User) {
             return new JsonResponse(['message' => 'Utilisateur non trouvé.'], 404);
