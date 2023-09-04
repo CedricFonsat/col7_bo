@@ -8,9 +8,12 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Controller\Api\User\AuthenticationGoogleController;
+use App\Controller\Api\User\AuthenticationGoogleController2;
 use App\Controller\Api\User\DeleteUserController;
 use App\Controller\Api\User\MeController;
 use App\Controller\Api\User\RegisterController;
+use App\Controller\Api\User\ResetPasswordController;
 use App\Controller\Api\User\UsersHomeController;
 use App\Controller\Api\User\UsersUploadImageController;
 use App\Repository\UserRepository;
@@ -21,8 +24,8 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[Vich\Uploadable]
@@ -40,6 +43,18 @@ use Symfony\Component\Validator\Constraints as Assert;
             uriTemplate: '/users/{id}/delete',
             controller: DeleteUserController::class
         ),
+        new Post(
+            uriTemplate: '/users/reset_password',
+            controller: ResetPasswordController::class
+        ),
+        new Post(
+            uriTemplate: '/authentication_google',
+            controller: AuthenticationGoogleController2::class
+        ),
+        /*new Post(
+            uriTemplate: '/users/{id}/add_favorite/{cardId}',
+            controller: AddFavoriteCardController::class
+        ),*/
         new Put(),
         new Get(),
         new Delete(),
@@ -57,12 +72,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             normalizationContext: [
                 'groups' => 'read:user:item:home',
             ]
-        )
-        /*     new Post(
-                  uriTemplate: '/users/{id}/add_favorite/{cardId}',
-                  controller: AddFavoriteCardController::class
-              ),
-        */
+        ),
+
     ],
 
 )]
@@ -89,9 +100,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
-    #[Assert\NotBlank]
-    #[Assert\Regex('/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)\S*$/')]
+    #[ORM\Column(nullable: true)]
+    #[Assert\NotBlank(message: "The password can't be blank ")]
+    #[Assert\Regex('/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)\S*$/', message: "The password must contain at least 6 
+    characters, a lowercase letter, an uppercase letter and a number.")]
     private ?string $password = null;
 
     #[Vich\UploadableField(mapping: 'user_thumbnail', fileNameProperty: 'imageName', size: 'imageSize')]
@@ -128,12 +140,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['read:user:item:me', 'read:user:item:home'])]
     private Collection $cards_favoris;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PasswordResetToken::class)]
+    private Collection $passwordResetTokens;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $google_picture = null;
+
     public function __construct()
     {
         $this->cards = new ArrayCollection();
         $this->wallet = 500;
         $this->roles = ['ROLE_USER'];
         $this->cards_favoris = new ArrayCollection();
+        $this->passwordResetTokens = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -145,7 +164,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getImageUrl(): string
     {
         if ($this->imageName != null) {
-            return 'http://192.168.1.14:8000/uploads/users/' . $this->imageName;
+            return 'http://192.168.1.123:8000/uploads/users/' . $this->imageName;
         } else {
             return 'https://4hcm.org/wp-content/uploads/2021/05/image-placeholder-350x350-1.png';
         }
@@ -337,6 +356,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $cardsFavori->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PasswordResetToken>
+     */
+    public function getPasswordResetTokens(): Collection
+    {
+        return $this->passwordResetTokens;
+    }
+
+    public function addPasswordResetToken(PasswordResetToken $passwordResetToken): static
+    {
+        if (!$this->passwordResetTokens->contains($passwordResetToken)) {
+            $this->passwordResetTokens->add($passwordResetToken);
+            $passwordResetToken->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePasswordResetToken(PasswordResetToken $passwordResetToken): static
+    {
+        if ($this->passwordResetTokens->removeElement($passwordResetToken)) {
+            // set the owning side to null (unless already changed)
+            if ($passwordResetToken->getUser() === $this) {
+                $passwordResetToken->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getGooglePicture(): ?string
+    {
+        return $this->google_picture;
+    }
+
+    public function setGooglePicture(?string $google_picture): static
+    {
+        $this->google_picture = $google_picture;
 
         return $this;
     }

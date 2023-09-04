@@ -5,16 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="22c967e5-062b-46ad-89e6-c41c3069803c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/DataFixtures/CardFixtures.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/error.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/success.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/Api/User/AuthenticationGoogleController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/Api/User/ResetPasswordController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/ResetPasswordType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/EmailSender.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/TokenGenerator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/emails/password_reset.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/password_reset/reset_password.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/password_reset/reset_password_error.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/password_reset/reset_password_success.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/GoogleAuthControllerTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/PasswordResetControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/col7_bo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/col7_bo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d711c472-5084-41ad-a424-d9d36472937e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/d711c472-5084-41ad-a424-d9d36472937e.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d711c472-5084-41ad-a424-d9d36472937e/storage_v2/_src_/schema/collect_db.s4c1mA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/d711c472-5084-41ad-a424-d9d36472937e/storage_v2/_src_/schema/collect_db.s4c1mA.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Api/User/UsersHomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/User/UsersHomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/CollectionCardFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/CollectionCardFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/styles/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20230902084450.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/CollectionCardCrudController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/CollectionCardCrudController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Api/User/UsersUploadImageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/User/UsersUploadImageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MailerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MailerController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Card.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Card.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/CollectionCard.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/CollectionCard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/CardTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CardTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +202,8 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
       <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/vendor/symfony/google-mailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -190,28 +214,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;cedric&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/cedricfonsat/Documents/IOTA/col7_bo&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "git-widget-placeholder": "cedric",
+    "last_opened_file_path": "/Users/cedricfonsat/Documents/IOTA/col7_bo/templates/password_reset",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/password_reset" />
+      <recent name="$PROJECT_DIR$/public/assets" />
       <recent name="$PROJECT_DIR$/config" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/config/packages" />
@@ -257,6 +285,14 @@
       <workItem from="1693562185095" duration="2263000" />
       <workItem from="1693601416322" duration="1741000" />
       <workItem from="1693637625289" duration="3135000" />
+      <workItem from="1693686412430" duration="10325000" />
+      <workItem from="1693735182639" duration="8857000" />
+      <workItem from="1693760811232" duration="1000000" />
+      <workItem from="1693764411142" duration="112000" />
+      <workItem from="1693764889649" duration="3235000" />
+      <workItem from="1693820432860" duration="5106000" />
+      <workItem from="1693834805096" duration="9629000" />
+      <workItem from="1693865127313" duration="954000" />
     </task>
     <servers />
   </component>
@@ -273,5 +309,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

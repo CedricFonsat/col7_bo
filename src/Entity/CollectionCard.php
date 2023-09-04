@@ -49,6 +49,7 @@ class CollectionCard
 
     #[ORM\Column(length: 255)]
     #[Groups(['read:collection:collection','read:user:item:me','read:user:item:home'])]
+    #[Assert\NotBlank(message: "Collection name is required")]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -86,6 +87,9 @@ class CollectionCard
 
     #[ORM\Column]
     private ?bool $isComingSoon = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -234,6 +238,18 @@ class CollectionCard
     public function setIsComingSoon(bool $isComingSoon): static
     {
         $this->isComingSoon = $isComingSoon;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

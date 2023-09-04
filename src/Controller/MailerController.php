@@ -30,7 +30,7 @@ class MailerController extends AbstractController
         } catch (TransportExceptionInterface $e) {
         }
 
-        return $this->render('mailer/index.html.twig');
+        return $this->render('mailer/request_password_reset.html.twig');
 
     }
 }

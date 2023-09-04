@@ -9,3 +9,7 @@ api_login_check:
 
 api_logout:
     path: /api/logout
+
+request_password_reset:
+    path: /request-password-reset
+    controller: App\Controller\PasswordResetController::requestPasswordReset
