@@ -12,22 +12,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AuthenticationGoogleController extends AbstractController
 {
-
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly JWTTokenManagerInterface $jwtManager
     ){}
-
-    public function __invoke(Request $request, UserRepository $userRepository): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $userData = json_decode($request->getContent(), true);
-
-        $ifUser = $userRepository->findOneBy([ 'googleId' => $userData['googleId']]);
-        $ifUserByMail = $userRepository->findOneBy(['email' => $userData['email']]);
-
-      // $tesr = array_keys_exists(['nickname','email','googleId','googlePicture'], $userData);
-
-       dd($userData['nickname'], $userData['email'],$userData['googleId'],$userData['googlePicture']);
+        $ifUser = $this->em->getRepository(User::class)->findOneBy([ 'googleId' => $userData['googleId']]);
+        $ifUserByMail = $this->em->getRepository(User::class)->findOneBy(['email' => $userData['email']]);
 
         if ($ifUser){
             $token = $this->jwtManager->create($ifUser);
@@ -38,7 +31,7 @@ class AuthenticationGoogleController extends AbstractController
             return new JsonResponse(['error' => 'Vous avez déjà un compte associé à cet e-mail']);
         }
 
-        if (array_keys_exists(['nickname','email','googleId','googlePicture'], $userData)){
+        if ($userData['email'] && $userData['googleId'] && $userData['nickname'] && $userData['googlePicture']){
 
             $user = new User();
             $user->setNickname($userData['nickname']);

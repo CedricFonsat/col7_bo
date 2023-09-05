@@ -49,7 +49,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         ),
         new Post(
             uriTemplate: '/authentication_google',
-            controller: AuthenticationGoogleController2::class
+            controller: AuthenticationGoogleController::class
         ),
         /*new Post(
             uriTemplate: '/users/{id}/add_favorite/{cardId}',
@@ -145,6 +145,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $google_picture = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $googleId = null;
 
     public function __construct()
     {
@@ -398,6 +401,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setGooglePicture(?string $google_picture): static
     {
         $this->google_picture = $google_picture;
+
+        return $this;
+    }
+
+    public function getGoogleId(): ?int
+    {
+        return $this->googleId;
+    }
+
+    public function setGoogleId(?int $googleId): static
+    {
+        $this->googleId = $googleId;
 
         return $this;
     }
