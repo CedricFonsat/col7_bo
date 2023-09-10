@@ -42,6 +42,5 @@ class ResetPasswordController extends AbstractController
         } else {
             return new JsonResponse(['message' => 'Erreur: Aucun utilisateur trouvé avec cette adresse e-mail.'], 400);
         }
-
     }
 }
