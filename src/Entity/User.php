@@ -108,11 +108,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Vich\UploadableField(mapping: 'user_thumbnail', fileNameProperty: 'imageName', size: 'imageSize')]
     #[Groups(['read:user:item:me'])]
-    #[Assert\File(
+ /*   #[Assert\File(
         maxSize: '1024k',
         extensions: ['jpg'],
         extensionsMessage: 'Please upload a valid JPG',
-    )]
+    )]*/
     public ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
@@ -167,7 +167,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getImageUrl(): string
     {
         if ($this->imageName != null) {
-            return 'http://192.168.1.123:8000/uploads/users/' . $this->imageName;
+            return 'http://192.168.1.14:8000/uploads/users/' . $this->imageName;
         } else {
             return 'https://4hcm.org/wp-content/uploads/2021/05/image-placeholder-350x350-1.png';
         }

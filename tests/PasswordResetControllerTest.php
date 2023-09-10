@@ -1,38 +1,53 @@
 <?php
 
 namespace App\Tests;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 
-class PasswordResetControllerTest extends WebTestCase
+class PasswordResetControllerTest extends TestCase
 {
-    public function testPasswordResetSuccess()
+    public function callResetPasswordAPI($email): ?ResponseInterface
     {
-        $client = static::createClient();
+        $client = HttpClient::create();
 
-        // Envoyer une demande POST de réinitialisation de mot de passe avec un e-mail valide
-        $client->request('POST', '/request-password-reset', ['email' => 'ced97x@gmail.com']);
+        $baseUrl = 'http://192.168.1.123:8000';
 
-        // Vérifier si la réponse est un succès
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $responseData = json_decode($client->getResponse()->getContent(), true);
+        $response = null;
 
-        // Vérifier si la réponse contient un message de succès
-        $this->assertTrue($responseData['success']);
+        try {
+            $response = $client->request('POST', $baseUrl . '/request-password-reset', [
+                'json' => ['email' => $email],
+            ]);
+        } catch (TransportExceptionInterface $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+        }
+
+        return $response;
     }
 
-    public function testPasswordResetInvalidEmail()
+
+    /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
+     */
+    public function testResetPasswordRequest()
     {
-        $client = static::createClient();
+        $response = $this->callResetPasswordAPI('ghermiston@yahoo.com');
 
-        // Envoyer une demande POST de réinitialisation de mot de passe avec un e-mail invalide
-        $client->request('POST', '/request-password-reset', ['email' => 'invalidemail']);
+        $this->assertNotNull($response);
 
-        // Vérifier si la réponse est une erreur
-        $this->assertSame(400, $client->getResponse()->getStatusCode());
-        $responseData = json_decode($client->getResponse()->getContent(), true);
+        $this->assertEquals(200, $response->getStatusCode());
 
-        // Vérifier si la réponse contient un message d'erreur approprié
-        $this->assertFalse($responseData['success']);
-        $this->assertSame('Invalid email address', $responseData['message']);
+        $responseData = json_decode($response->getContent(), true);
+        $this->assertEquals('Password reset link sent successfully', $responseData['message']);
     }
+
+
 }

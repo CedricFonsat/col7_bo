@@ -120,7 +120,7 @@ class Card
     public function getImageUrl(): string
     {
         if ($this->imageName != null) {
-            return 'http://192.168.1.123:8000/uploads/cards/' . $this->imageName;
+            return 'http://192.168.1.14:8000/uploads/cards/' . $this->imageName;
         } else {
             return 'https://4hcm.org/wp-content/uploads/2021/05/image-placeholder-350x350-1.png';
         }
