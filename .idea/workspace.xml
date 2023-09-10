@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="22c967e5-062b-46ad-89e6-c41c3069803c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/users/unique_1693863847539_ln05t.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Api/User/UsersUploadImageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/User/UsersUploadImageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Card.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Card.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/RequestPasswordResetType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RequestPasswordResetType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ResetPasswordType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ResetPasswordType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/PasswordResetControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/PasswordResetControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Api/User/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/User/ResetPasswordController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,7 +266,7 @@
       <workItem from="1693867337606" duration="2303000" />
       <workItem from="1693991316894" duration="7117000" />
       <workItem from="1694095239539" duration="606000" />
-      <workItem from="1694286954233" duration="3996000" />
+      <workItem from="1694286954233" duration="6273000" />
     </task>
     <servers />
   </component>
